@@ -123,7 +123,7 @@ function Span(s, attr)
   local text = s
   if attr["style"] then
       -- color
-      _, _, color = attr["style"]:find("color%s*:%s*(.-)%s*;")
+      local _, _, color = attr["style"]:find("color%s*:%s*(.-)%s*;")
       if color then
           text = "[color=" .. color .. "]" .. text .. "[/color]"
       end
@@ -132,6 +132,12 @@ function Span(s, attr)
       local _, _, textsize = attr["style"]:find("size%s*:%s*(.-)%s*;")
       if textsize then
           text = "[size=" .. textsize .. "]" .. text .. "[/size]"
+      end
+
+      --small caps, in case they get missed by pandoc
+      local _, _, caps = attr["style"]:find("variant%s*:%s*small%-caps")
+      if caps then
+          text = "[smcaps]" .. text .. "[/smcaps]"
       end
   end
   return text

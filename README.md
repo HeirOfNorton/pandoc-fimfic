@@ -5,7 +5,7 @@ Custom Writer for Pandoc that writes FimFiction.net compatible bbcode.
 
 This script requires Pandoc, a program for converting documents between
 several different formats, created by John MacFarlane. Find it at
-<http://www.pandoc.com>. Please see the Pandoc User's Guide at the
+<http://johnmacfarlane.net/pandoc/index.html>. Please see the Pandoc User's Guide at the
 same page for details and options for using Pandoc that are not
 covered in this Readme.
 

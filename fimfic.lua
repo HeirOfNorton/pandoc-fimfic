@@ -253,22 +253,6 @@ end
 function Doc(text, metadata, variables)
   local body = text
 
-  -- Add Title block, if it exists
-  if metadata["fimfic-title-block"] then
-      local titleblock = metadata["fimfic-title-block"]
-      local title = ""
-      if type(titleblock) == "table" then
-          title = table.concat(titleblock, "\n")
-      elseif type(titleblock) == "string" then
-          title = titleblock
-      end
-
-      title = title:gsub("%$(.-)%$", function(n)
-          if metadata[n] then return metadata[n] end
-      end)
-      body = title .. "\n\n" .. body
-  end
-  
   -- Append footnotes to the end of the body text, before
   -- replacing options and placeholders.
   if #notes > 0 then
@@ -294,10 +278,10 @@ function Doc(text, metadata, variables)
 
   -- Indented paragraphs
   -- (Not indented by default)
-  if metadata["fimfic-auto-indent"] then
-      body = body:gsub("{{!para!}}", "\t")
-  else
+  if metadata["fimfic-no-indent"] then
       body = body:gsub("{{!para!}}", "")
+  else
+      body = body:gsub("{{!para!}}", "\t")
   end
 
   -- Headers
